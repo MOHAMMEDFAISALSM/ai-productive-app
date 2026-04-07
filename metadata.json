@@ -1,0 +1,5 @@
+{
+  "name": "AI Personal Productivity Planner",
+  "description": "A comprehensive productivity tool featuring AI-driven task planning, smart scheduling, focus timers, and detailed analytics.",
+  "requestFramePermissions": ["notifications"]
+}

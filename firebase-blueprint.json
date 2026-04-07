@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "darkMode": { "type": "boolean" },
+            "focusDuration": { "type": "number" },
+            "breakDuration": { "type": "number" }
+          }
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A productivity task",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "deadline": { "type": "string", "format": "date-time" },
+        "completed": { "type": "boolean" },
+        "category": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "subtasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "completed": { "type": "boolean" }
+            }
+          }
+        }
+      },
+      "required": ["uid", "title", "priority"]
+    },
+    "Plan": {
+      "title": "Plan",
+      "description": "AI-generated daily schedule",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "time": { "type": "string" },
+              "taskTitle": { "type": "string" },
+              "duration": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["uid", "date", "schedule"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User tasks"
+    },
+    "/plans/{planId}": {
+      "schema": "Plan",
+      "description": "Daily plans"
+    }
+  }
+}
